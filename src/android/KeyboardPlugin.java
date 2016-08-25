@@ -18,18 +18,18 @@ import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
-/*
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-*/
+
 public class KeyboardPlugin extends CordovaPlugin  {
-    private UsbManager usbManager;
+    /*private UsbManager usbManager;
     private UsbDevice usbDevice;
 
     private Reader reader;
     private PendingIntent mPermissionIntent;
-    
+    */
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
     /*
