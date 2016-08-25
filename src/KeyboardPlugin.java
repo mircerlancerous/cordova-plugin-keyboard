@@ -45,8 +45,14 @@ public class KeyboardPlugin extends CordovaPlugin  {
         if (action.equalsIgnoreCase("keyUp")) {
             keyup_callback = callbackContext;
         }
+        else if(action.equalsIgnoreCase("stopKeyUp")){
+        	keyup_callback = null;
+        }
         else if(action.equalsIgnoreCase("keyDown")){
             keydown_callback = callbackContext;
+        }
+        else if(action.equalsIgnoreCase("stopKeyDown")){
+        	keydown_callback = null;
         }
         else {
             // invalid action
@@ -63,15 +69,23 @@ public class KeyboardPlugin extends CordovaPlugin  {
     
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
+    	if(keydown_callback == null){
+    		return true;
+    	}
         PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
         result.setKeepCallback(true);
         keydown_callback.sendPluginResult(result);
+        return false;
     }
     
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
+    	if(keyup_callback == null){
+    		return true;
+    	}
         PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
         result.setKeepCallback(true);
         keyup_callback.sendPluginResult(result);
+        return false;
     }
 }
