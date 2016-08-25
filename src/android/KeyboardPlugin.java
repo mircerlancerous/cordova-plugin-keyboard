@@ -23,7 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.view.InputEvent;
+import android.view.InputEvent.KeyEvent;
 
 public class KeyboardPlugin extends CordovaPlugin  {
     /*private UsbManager usbManager;
