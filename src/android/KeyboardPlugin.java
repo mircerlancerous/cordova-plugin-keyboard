@@ -69,7 +69,7 @@ public class KeyboardPlugin extends CordovaPlugin  {
         return true;
     }
     
-    @Override
+    //@Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
     	if(keydown_callback == null){
     		return true;
@@ -80,7 +80,7 @@ public class KeyboardPlugin extends CordovaPlugin  {
         return false;
     }
     
-    @Override
+    //@Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
     	if(keyup_callback == null){
     		return true;
