@@ -7,8 +7,8 @@
     <description>This is a project to read key strokes from Cordova on Android.</description>
     <license>Apache 2.0</license>
     <keywords>cordova,plugin,keyboard</keywords>
-    <repo>https://github.com/mircerlancerous/cordova-keyboard-plugin</repo>
-    <issue>https://github.com/mircerlancerous/cordova-keyboard-plugin/issues</issue>
+    <repo>https://github.com/mircerlancerous/cordova-plugin-keyboard</repo>
+    <issue>https://github.com/mircerlancerous/cordova-plugin-keyboard/issues</issue>
  
     <engines>
         <engine name="cordova-android" version=">=3.6.0" /><!-- Requires CordovaPlugin.preferences -->
