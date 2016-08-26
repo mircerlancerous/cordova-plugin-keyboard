@@ -11,9 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.view.View;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
+import android.view.*;
 
 public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     private CallbackContext keyup_callback = null;
