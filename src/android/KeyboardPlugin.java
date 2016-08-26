@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
 public class KeyboardPlugin extends CordovaPlugin  {
