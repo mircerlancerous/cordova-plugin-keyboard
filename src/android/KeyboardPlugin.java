@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
-public class KeyboardPlugin extends CordovaPlugin  {
+public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
     
@@ -59,7 +59,6 @@ public class KeyboardPlugin extends CordovaPlugin  {
 	    }
 	};
     
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
     	if(keydown_callback == null){
     		return true;
@@ -70,7 +69,6 @@ public class KeyboardPlugin extends CordovaPlugin  {
         return false;
     }
     
-    @Override
     public boolean onKeyUp(int keyCode, KeyEvent event){
     	if(keyup_callback == null){
     		return true;
