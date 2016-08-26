@@ -48,7 +48,17 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     }
     
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event){
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_UP) {
+            KeyUp(keyCode, event);
+        }
+        else if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        	KeyDown(keyCode, event);
+        }
+        return false;
+    }
+    
+    private boolean KeyDown(int keyCode, KeyEvent event){
     	if(keydown_callback == null){
     		return true;
     	}
@@ -58,8 +68,7 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         return false;
     }
     
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event){
+    private boolean KeyUp(int keyCode, KeyEvent event){
     	if(keyup_callback == null){
     		return true;
     	}
