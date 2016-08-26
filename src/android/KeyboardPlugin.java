@@ -19,9 +19,14 @@ import android.view.*;
 public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
+    private View currentView = null;
     
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+        if(this.currentView == null){
+        	currentView = this.webView.getView();
+        	currentView.setOnKeyListener(this);
+        }
         
         if (action.equalsIgnoreCase("keyUp")) {
             keyup_callback = callbackContext;
