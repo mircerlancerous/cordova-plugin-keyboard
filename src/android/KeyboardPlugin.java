@@ -11,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.KeyEvent;
 import android.view.*;
 
 public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
@@ -44,27 +47,25 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         return true;
     }
     
-    OnKeyListener keyListener = new OnKeyListener() {
-	    @Override
-	    public boolean onKeyDown(int keyCode, KeyEvent event){
-	    	if(keydown_callback == null){
-	    		return true;
-	    	}
-	        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-	        result.setKeepCallback(true);
-	        keydown_callback.sendPluginResult(result);
-	        return false;
-	    }
-	    
-	    @Override
-	    public boolean onKeyUp(int keyCode, KeyEvent event){
-	    	if(keyup_callback == null){
-	    		return true;
-	    	}
-	        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-	        result.setKeepCallback(true);
-	        keyup_callback.sendPluginResult(result);
-	        return false;
-	    }
-	};
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+    	if(keydown_callback == null){
+    		return true;
+    	}
+        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+        result.setKeepCallback(true);
+        keydown_callback.sendPluginResult(result);
+        return false;
+    }
+    
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event){
+    	if(keyup_callback == null){
+    		return true;
+    	}
+        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+        result.setKeepCallback(true);
+        keyup_callback.sendPluginResult(result);
+        return false;
+    }
 }
