@@ -48,34 +48,25 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     
     OnKeyListener keyListener = new OnKeyListener() {
 	    @Override
-	    public boolean onKey(View v, int keyCode, KeyEvent event) {
-	        if (event.getAction() == KeyEvent.ACTION_UP) {
-	            onKeyUp(keyCode, event);
-	        }
-	        else if (event.getAction() == KeyEvent.ACTION_DOWN) {
-	        	onKeyDown(keyCode, event);
-	        }
+	    public boolean onKeyDown(int keyCode, KeyEvent event){
+	    	if(keydown_callback == null){
+	    		return true;
+	    	}
+	        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+	        result.setKeepCallback(true);
+	        keydown_callback.sendPluginResult(result);
+	        return false;
+	    }
+	    
+	    @Override
+	    public boolean onKeyUp(int keyCode, KeyEvent event){
+	    	if(keyup_callback == null){
+	    		return true;
+	    	}
+	        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+	        result.setKeepCallback(true);
+	        keyup_callback.sendPluginResult(result);
 	        return false;
 	    }
 	};
-    
-    public boolean onKeyDown(int keyCode, KeyEvent event){
-    	if(keydown_callback == null){
-    		return true;
-    	}
-        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-        result.setKeepCallback(true);
-        keydown_callback.sendPluginResult(result);
-        return false;
-    }
-    
-    public boolean onKeyUp(int keyCode, KeyEvent event){
-    	if(keyup_callback == null){
-    		return true;
-    	}
-        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-        result.setKeepCallback(true);
-        keyup_callback.sendPluginResult(result);
-        return false;
-    }
 }
