@@ -21,5 +21,13 @@ Plugin.keyboardPlugin = {
   
   testKeyDown: function(callback, onFail){
     cordova.exec(callback, onFail, 'KeyboardPlugin', 'testKeyDown', []);
+  },
+  
+  catchAllKeyEvents: function(callback, onFail){
+    cordova.exec(callback, onFail, 'KeyboardPlugin', 'catchAllKeyEvents', []);
+  },
+  
+  getStatus: function(callback, onFail){
+    cordova.exec(callback, onFail, 'KeyboardPlugin', 'getStatus', []);
   }
 };
