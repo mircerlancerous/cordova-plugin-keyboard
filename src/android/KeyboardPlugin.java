@@ -19,6 +19,7 @@ import android.view.*;
 public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
+    private CallbackContext allkeys_callback = null;
     private View currentView = null;
     
     @Override
@@ -62,6 +63,25 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
             result = new PluginResult(PluginResult.Status.OK);
             this.onKeyDown(68,null);
         }
+        else if(action.equalsIgnoreCase("catchAllKeyEvents")){
+            this.allkeys_callback = callbackContext;
+        }
+        else if(action.equalsIgnoreCase("getStatus")){
+            String msg = "status:";
+            if(this.keyup_callback != null){
+                msg += "keyup active - ";
+            }
+            else{
+                msg += "keyup inactive - ";
+            }
+            if(this.keydown_callback != null){
+                msg += "keydown active";
+            }
+            else{
+                msg += "keydown inactive";
+            }
+            result = new PluginResult(PluginResult.Status.OK,msg);
+        }
         else {
             // invalid action
             return false;
@@ -77,10 +97,20 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         if (event.getAction() == KeyEvent.ACTION_UP) {
             return this.onKeyUp(keyCode, event);
         }
-        else if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
             return this.onKeyDown(keyCode, event);
         }
-        return false;
+        return this.onCatchAllKeyEvents(keyCode, event);
+    }
+    
+    public boolean onCatchAllKeyEvents(int keyCode, KeyEvent event){
+        if(this.allkeys_callback != null){
+            return false;
+        }
+        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+        result.setKeepCallback(true);
+        this.allkeys_callback.sendPluginResult(result);
+        return true;
     }
     
     //@Override
