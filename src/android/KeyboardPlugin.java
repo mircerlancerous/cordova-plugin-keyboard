@@ -22,23 +22,26 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     private View currentView = null;
     
     @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        // init code
+        this.currentView = webView.getView();
+        this.currentView.setOnKeyListener(this);
+    }
+    
+    @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-        if(this.currentView == null){
-        	currentView = this.webView.getView();
-        	currentView.setOnKeyListener(this);
-        }
-        
         if (action.equalsIgnoreCase("keyUp")) {
-            keyup_callback = callbackContext;
+            this.keyup_callback = callbackContext;
         }
         else if(action.equalsIgnoreCase("stopKeyUp")){
-        	keyup_callback = null;
+        	this.keyup_callback = null;
         }
         else if(action.equalsIgnoreCase("keyDown")){
-            keydown_callback = callbackContext;
+            this.keydown_callback = callbackContext;
         }
         else if(action.equalsIgnoreCase("stopKeyDown")){
-        	keydown_callback = null;
+        	this.keydown_callback = null;
         }
         else {
             // invalid action
@@ -51,7 +54,7 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
 
         return true;
     }
-    
+    /*
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -62,24 +65,26 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         }
         return false;
     }
-    
-    private boolean KeyDown(int keyCode, KeyEvent event){
-    	if(keydown_callback == null){
-    		return true;
+    */
+    //@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+    	if(this.keydown_callback == null){
+    		return false;
     	}
         PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
         result.setKeepCallback(true);
-        keydown_callback.sendPluginResult(result);
-        return false;
+        this.keydown_callback.sendPluginResult(result);
+        return true;
     }
     
-    private boolean KeyUp(int keyCode, KeyEvent event){
-    	if(keyup_callback == null){
-    		return true;
+    //@Override
+    public boolean onKeyUp(int keyCode, KeyEvent event){
+    	if(this.keyup_callback == null){
+    		return false;
     	}
         PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
         result.setKeepCallback(true);
-        keyup_callback.sendPluginResult(result);
-        return false;
+        this.keyup_callback.sendPluginResult(result);
+        return true;
     }
 }
