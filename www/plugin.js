@@ -13,5 +13,13 @@ Plugin.keyboardPlugin = {
   
   stopKeyDown: function(callback, onFail){
   	cordova.exec(callback, onFail, 'KeyboardPlugin', 'stopKeyDown', []);
+  },
+  
+  testKeyUp: function(callback, onFail){
+    cordova.exec(callback, onFail, 'KeyboardPlugin', 'testKeyUp', []);
+  },
+  
+  testKeyDown: function(callback, onFail){
+    cordova.exec(callback, onFail, 'KeyboardPlugin', 'testKeyDown', []);
   }
 };
