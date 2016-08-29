@@ -108,7 +108,8 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
             return false;
         }
         try{
-            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            String str = String.valueOf((char)event.getUnicodeChar());
+            PluginResult result = new PluginResult(PluginResult.Status.OK, str);
             result.setKeepCallback(true);
             this.allkeys_callback.sendPluginResult(result);
         }
@@ -125,7 +126,8 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     		return false;
     	}
     	try{
-            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            String str = String.valueOf((char)event.getUnicodeChar());
+            PluginResult result = new PluginResult(PluginResult.Status.OK, str);
             result.setKeepCallback(true);
             this.keydown_callback.sendPluginResult(result);
     	}
@@ -142,7 +144,8 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     		return false;
     	}
     	try{
-            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            String str = String.valueOf((char)event.getUnicodeChar());
+            PluginResult result = new PluginResult(PluginResult.Status.OK, str);
             result.setKeepCallback(true);
             this.keyup_callback.sendPluginResult(result);
     	}
