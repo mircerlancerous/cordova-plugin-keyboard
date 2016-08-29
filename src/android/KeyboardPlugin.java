@@ -31,12 +31,8 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         this.currentView.setOnKeyListener(
                 new View.OnKeyListener(){
                     @Override
-                    public boolean onKeyUp(int keyCode, KeyEvent event){
-                        return doKeyUp(keyCode, event);
-                    }
-                    @Override
-                    public boolean onKeyDown(int keyCode, KeyEvent event){
-                        return doKeyDown(keyCode, event);
+                    public boolean onKey(View view, int keyCode, KeyEvent event){
+                        return doKey(view, keyCode, event);
                     }
                 }
             );
@@ -104,8 +100,8 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         return true;
     }
     /*
-    @Override
-    public boolean onKey(View v, int keyCode, KeyEvent event) {
+    @Override*/
+    public boolean doKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
             return this.onKeyUp(keyCode, event);
         }
@@ -114,7 +110,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         }
         return this.onCatchAllKeyEvents(keyCode, event);
     }
-    *//*
+    /*
     public boolean onCatchAllKeyEvents(int keyCode, KeyEvent event){
         if(this.allkeys_callback != null){
             return false;
