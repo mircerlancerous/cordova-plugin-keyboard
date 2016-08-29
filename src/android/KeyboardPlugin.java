@@ -107,9 +107,15 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         if(this.allkeys_callback != null){
             return false;
         }
-        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-        result.setKeepCallback(true);
-        this.allkeys_callback.sendPluginResult(result);
+        try{
+            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            result.setKeepCallback(true);
+            this.allkeys_callback.sendPluginResult(result);
+        }
+        catch(Exception e){
+            PluginResult result = new PluginResult(PluginResult.Status.ERROR, "error in all key event handling");
+            this.allkeys_callback.sendPluginResult(result);
+        }
         return true;
     }
     
@@ -118,9 +124,15 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     	if(this.keydown_callback == null){
     		return false;
     	}
-        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-        result.setKeepCallback(true);
-        this.keydown_callback.sendPluginResult(result);
+    	try{
+            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            result.setKeepCallback(true);
+            this.keydown_callback.sendPluginResult(result);
+    	}
+    	catch(Exception e){
+    	    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "error in keydown handling");
+            this.keydown_callback.sendPluginResult(result);
+    	}
         return true;
     }
     
@@ -129,9 +141,15 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     	if(this.keyup_callback == null){
     		return false;
     	}
-        PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
-        result.setKeepCallback(true);
-        this.keyup_callback.sendPluginResult(result);
+    	try{
+            PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+            result.setKeepCallback(true);
+            this.keyup_callback.sendPluginResult(result);
+    	}
+    	catch(Exception e){
+    	    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "error in keyup handling");
+            this.keyup_callback.sendPluginResult(result);
+    	}
         return true;
     }
 }
