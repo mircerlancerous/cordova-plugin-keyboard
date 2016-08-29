@@ -16,7 +16,7 @@ import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 import android.view.*;
 
-public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
+public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
     private View currentView = null;
@@ -24,9 +24,15 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        // init code
+        // init code for view event listening
+        /*
         this.currentView = webView.getView();
         this.currentView.setOnKeyListener(this);
+        */
+        // init code for activity event listening
+        Activity act = cordova.getActivity();
+        act.onKeyUp = this.onKeyUp;
+        act.onKeyDown = this.onKeyDown;
     }
     
     @Override
@@ -58,10 +64,10 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
-            return onKeyUp(keyCode, event);
+            return this.onKeyUp(keyCode, event);
         }
         else if (event.getAction() == KeyEvent.ACTION_DOWN) {
-        	return onKeyDown(keyCode, event);
+            return this.onKeyDown(keyCode, event);
         }
         return false;
     }
