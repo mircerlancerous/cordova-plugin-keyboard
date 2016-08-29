@@ -40,6 +40,7 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+        result.setKeepCallback(true);
         
         if (action.equalsIgnoreCase("keyUp")) {
             this.keyup_callback = callbackContext;
@@ -48,7 +49,8 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         	this.keyup_callback = null;
         }
         else if(action.equalsIgnoreCase("testKeyUp")){
-            result = new PluginResult(PluginResult.Status.OK, "U");
+            result = new PluginResult(PluginResult.Status.OK);
+            this.onKeyUp(85,null);
         }
         else if(action.equalsIgnoreCase("keyDown")){
             this.keydown_callback = callbackContext;
@@ -57,14 +59,14 @@ public class KeyboardPlugin extends CordovaPlugin implements OnKeyListener{
         	this.keydown_callback = null;
         }
         else if(action.equalsIgnoreCase("testKeyDown")){
-            result = new PluginResult(PluginResult.Status.OK, "D");
+            result = new PluginResult(PluginResult.Status.OK);
+            this.onKeyDown(68,null);
         }
         else {
             // invalid action
             return false;
         }
         
-        result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
 
         return true;
