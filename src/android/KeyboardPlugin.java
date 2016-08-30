@@ -12,12 +12,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.view.View;
-//import android.view.View.OnKeyListener;
+import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
-//import android.view.*;
-import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.BaseInputConnection;
-import android.view.inputmethod.EditorInfo;
+import android.view.*;
 
 public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     private CallbackContext keyup_callback = null;
@@ -31,14 +28,14 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         // init code for view event listening
         
         this.currentView = webView.getView();
-        /*this.currentView.setOnKeyListener(
+        this.currentView.setOnKeyListener(
                 new View.OnKeyListener(){
                     @Override
                     public boolean onKey(View view, int keyCode, KeyEvent event){
                         return doKey(view, keyCode, event);
                     }
                 }
-            );*/
+            );
     }
     
     @Override
@@ -103,7 +100,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         return true;
     }
     /*
-    @Override
+    @Override*/
     public boolean doKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
             return this.doKeyUp(keyCode, event);
@@ -113,7 +110,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         }
         return false;//this.onCatchAllKeyEvents(keyCode, event);
     }
-    
+    /*
     public boolean onCatchAllKeyEvents(int keyCode, KeyEvent event){
         if(this.allkeys_callback != null){
             return false;
@@ -131,31 +128,6 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         return true;
     }
     */
-    @Override
-    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        return new BaseInputConnection(this.currentView, false); //this is needed for #dispatchKeyEvent() to be notified.
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-    //    boolean dispatchFirst = super.dispatchKeyEvent(event);
-        // Listening here for whatever key events you need
-        if (event.getAction() == KeyEvent.ACTION_UP){
-            return this.doKeyUp(event.getKeyCode(),event);
-            /*
-            switch (event.getKeyCode()) {
-                case KeyEvent.KEYCODE_SPACE:
-                case KeyEvent.KEYCODE_ENTER:
-                    // e.g. get space and enter events here
-                    break;
-            }*/
-        }
-        else if(event.getAction() == KeyEvent.ACTION_DOWN){
-            return this.doKeyDown(event.getKeyCode(),event);
-        }
-        return false;//dispatchFirst;
-    }
-    
     public boolean doKeyDown(int keyCode, KeyEvent event){
     	if(this.keydown_callback == null){
     		return false;
