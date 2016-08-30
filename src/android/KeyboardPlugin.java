@@ -11,10 +11,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.view.View;
-import android.view.View.OnKeyListener;
+//import android.view.View;
+//import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
-import android.view.*;
+//import android.view.*;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.BaseInputConnection;
+import android.view.inputmethod.EditorInfo;
 
 public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     private CallbackContext keyup_callback = null;
@@ -135,7 +138,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        boolean dispatchFirst = super.dispatchKeyEvent(event);
+    //    boolean dispatchFirst = super.dispatchKeyEvent(event);
         // Listening here for whatever key events you need
         if (event.getAction() == KeyEvent.ACTION_UP){
             return this.doKeyUp(event.getKeyCode(),event);
@@ -150,7 +153,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         else if(event.getAction() == KeyEvent.ACTION_DOWN){
             return this.doKeyDown(event.getKeyCode(),event);
         }
-        return dispatchFirst;
+        return false;//dispatchFirst;
     }
     
     public boolean doKeyDown(int keyCode, KeyEvent event){
