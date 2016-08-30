@@ -23,7 +23,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
     private CallbackContext allkeys_callback = null;
-    private View currentView = null;
+    //private View currentView = null;
     
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
