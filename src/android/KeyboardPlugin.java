@@ -26,7 +26,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         // init code for view event listening
-        
+        /*
         this.currentView = webView.getView();
         this.currentView.setOnKeyListener(
                 new View.OnKeyListener(){
@@ -35,7 +35,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
                         return doKey(view, keyCode, event);
                     }
                 }
-            );
+            );*/
     }
     
     @Override
@@ -100,7 +100,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         return true;
     }
     /*
-    @Override*/
+    @Override
     public boolean doKey(View v, int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
             return this.doKeyUp(keyCode, event);
@@ -110,7 +110,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         }
         return false;//this.onCatchAllKeyEvents(keyCode, event);
     }
-    /*
+    
     public boolean onCatchAllKeyEvents(int keyCode, KeyEvent event){
         if(this.allkeys_callback != null){
             return false;
@@ -128,6 +128,31 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
         return true;
     }
     */
+    @Override
+    public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+        return new BaseInputConnection(this, false); //this is needed for #dispatchKeyEvent() to be notified.
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        boolean dispatchFirst = super.dispatchKeyEvent(event);
+        // Listening here for whatever key events you need
+        if (event.getAction() == KeyEvent.ACTION_UP){
+            return this.doKeyUp(event.getKeyCode(),event);
+            /*
+            switch (event.getKeyCode()) {
+                case KeyEvent.KEYCODE_SPACE:
+                case KeyEvent.KEYCODE_ENTER:
+                    // e.g. get space and enter events here
+                    break;
+            }*/
+        }
+        else if(event.getAction() == KeyEvent.ACTION_DOWN){
+            return this.doKeyDown(event.getKeyCode(),event);
+        }
+        return dispatchFirst;
+    }
+    
     public boolean doKeyDown(int keyCode, KeyEvent event){
     	if(this.keydown_callback == null){
     		return false;
