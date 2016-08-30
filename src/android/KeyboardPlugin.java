@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-//import android.view.View;
+import android.view.View;
 //import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 //import android.view.*;
@@ -23,15 +23,15 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     private CallbackContext keyup_callback = null;
     private CallbackContext keydown_callback = null;
     private CallbackContext allkeys_callback = null;
-    //private View currentView = null;
+    private View currentView = null;
     
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         // init code for view event listening
-        /*
+        
         this.currentView = webView.getView();
-        this.currentView.setOnKeyListener(
+        /*this.currentView.setOnKeyListener(
                 new View.OnKeyListener(){
                     @Override
                     public boolean onKey(View view, int keyCode, KeyEvent event){
@@ -133,7 +133,7 @@ public class KeyboardPlugin extends CordovaPlugin{// implements OnKeyListener{
     */
     @Override
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
-        return new BaseInputConnection(this, false); //this is needed for #dispatchKeyEvent() to be notified.
+        return new BaseInputConnection(this.currentView, false); //this is needed for #dispatchKeyEvent() to be notified.
     }
 
     @Override
